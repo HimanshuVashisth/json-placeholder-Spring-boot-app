@@ -1,39 +1,60 @@
 package com.westpac.jsonplaceholderSpringbootapp;
 
+import static com.jayway.restassured.RestAssured.given;
+
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.skyscreamer.jsonassert.JSONAssert;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.westpac.jsonplaceholderSpringbootapp.model.PostModel;
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.http.ContentType;
+import com.jayway.restassured.path.json.JsonPath;
+import com.jayway.restassured.response.Response;
+import com.westpac.jsonplaceholderSpringbootapp.model.CommentModel;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = JsonPlaceholderSpringBootAppApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+import static org.assertj.core.api.Assertions.assertThat;
+import static com.jayway.restassured.RestAssured.expect;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class JsonPlaceholderSpringBootAppApplicationTests {
-
-	@LocalServerPort
-	private int port;
-
-	TestRestTemplate restTemplate = new TestRestTemplate();
-
-	HttpHeaders headers = new HttpHeaders();
 	
-	@Test
-	public void testFetchPosts() {
-		
-	}
+	private static final Logger log=LoggerFactory.getLogger(JsonPlaceholderSpringBootAppApplicationTests.class);
 
-	private String composeURLWithPort(String uri) {
-		return "http://localhost:" + port + uri;
-	}
+    @LocalServerPort
+    int port;
+    
+    String response=null;
+
+    @BeforeEach
+    public void setUp() {
+    	RestAssured.baseURI="http://localhost";
+        RestAssured.port = port;
+    }
+
+    @Test
+    public void testfetchAllPosts() throws InterruptedException {
+        given().basePath("/posts").then().statusCode(200);
+    }
+    
+    @Test
+    public void fetchCommentsByPostId() throws  InterruptedException {    	
+    	List<CommentModel> comments = new ArrayList<>();
+    	
+    	response = expect().statusCode(200).when().get("/posts/comments?postId=1").body().asString();
+		log.info(response);
+		
+    	given().contentType(ContentType.JSON).when().body(comments).post("/posts/comments?postId=1").then().extract().response();
+    	
+    }
+
 }

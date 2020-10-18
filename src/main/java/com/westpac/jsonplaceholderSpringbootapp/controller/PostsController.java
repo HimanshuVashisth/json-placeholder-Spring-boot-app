@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
 public class PostsController {
 	
 	private final Logger log = LoggerFactory.getLogger(PostsController.class);
-	
+		
 	@Autowired
 	private PostService postService;
 	
