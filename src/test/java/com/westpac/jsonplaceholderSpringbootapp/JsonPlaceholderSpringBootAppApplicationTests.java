@@ -1,11 +1,11 @@
 package com.westpac.jsonplaceholderSpringbootapp;
 
+import static com.jayway.restassured.RestAssured.expect;
 import static com.jayway.restassured.RestAssured.given;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,12 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
-import com.jayway.restassured.path.json.JsonPath;
-import com.jayway.restassured.response.Response;
 import com.westpac.jsonplaceholderSpringbootapp.model.CommentModel;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static com.jayway.restassured.RestAssured.expect;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
