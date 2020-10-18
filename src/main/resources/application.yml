@@ -1,0 +1,15 @@
+--- 
+api.version: "1.0.0"
+json.placeholder.url.comments.by.postId: "https://jsonplaceholder.typicode.com/comments?postId="
+json.placeholder.url.posts: "https://jsonplaceholder.typicode.com/posts"
+logging: 
+  level: 
+    org.springframework.web: INFO
+    org.springframework.web.filter.CommonsRequestLoggingFilter: INFO
+    westpac.jsonplaceholderSpringbootapp: INFO
+server: 
+  port: 8080
+spring: 
+  application: 
+    name: jsonplaceholderSpringbootapp-portal
+  profiles.active: local
