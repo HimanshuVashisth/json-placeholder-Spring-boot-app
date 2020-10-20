@@ -12,4 +12,4 @@ server:
 spring: 
   application: 
     name: jsonplaceholderSpringbootapp-portal
-  profiles.active: local
+  profiles.active: docker

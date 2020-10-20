@@ -10,13 +10,14 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.westpac</groupId>
-	<artifactId>json-placeholder-Spring-boot-app</artifactId>
+	<artifactId>json-placeholder-spring-boot-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>json-placeholder-Spring-boot-app</name>
+	<name>json-placeholder-spring-boot-app</name>
 	<description>RESTful API publisher in Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>
+		<docker.image.prefix>hvashistha54</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -96,6 +97,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
@@ -126,6 +128,36 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>1.2.2</version>
+				<dependencies>
+					<dependency>
+						<groupId>javax.activation</groupId>
+						<artifactId>activation</artifactId>
+						<version>1.1.1</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<pushImage>false</pushImage>
+					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<dockerDirectory>docker</dockerDirectory>					
+					<registryUrl>https://hub.docker.com/repository/docker/hvashistha54/${project.artifactId}</registryUrl>
+					<image>${docker.image.prefix}/${project.artifactId}</image>				
+					<newName>${docker.image.prefix}/${project.artifactId}:${project.version}</newName>
+					<forceTags>true</forceTags>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 

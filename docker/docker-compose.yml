@@ -1,0 +1,7 @@
+services: 
+   json-placeholder-spring-boot-app:
+     image: hvashistha54/json-placeholder-spring-boot-app:latest
+     ports:
+       - "8080:8080"
+     environment:
+       env_name: dev
