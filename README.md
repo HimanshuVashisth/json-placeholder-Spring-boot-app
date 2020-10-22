@@ -3,7 +3,7 @@ This Spring boot application publishes RESTful API endpoints between the data so
 
 In the project directory, you can run:
 ### `mvn clean install`
-### `java -jar target/json-placeholder-Spring-boot-app-0.0.1-SNAPSHOT.jar`
+### `java -jar target/json-placeholder-Spring-boot-app.jar`
 
 Application should be up & running. 
 
