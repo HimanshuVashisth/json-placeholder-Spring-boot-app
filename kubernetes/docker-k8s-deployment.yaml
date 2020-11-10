@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: json-placeholder-docker-k8s-deployment
+  labels:
+     app: json-placeholder-docker-k8s-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: json-placeholder-docker-k8s-demo
+  template:
+    metadata:
+      labels:
+        component: json-placeholder-docker-k8s-demo   
+    spec:
+      containers:
+      - name: json-placeholder-docker-k8s-demo
+        image: hvashistha54/json-placeholder-spring-boot-app
+        ports:
+        - containerPort: 8080
