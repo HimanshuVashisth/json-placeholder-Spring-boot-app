@@ -22,3 +22,7 @@ Docker steps:
 clear local docker images using ## `docker rmi <image-name>`
   
 ## `docker run -p 8080:8080 hvashistha54/spring-boot-app`
+
+Application should be up & running. 
+
+To confirm open browser & go to : http://localhost:8080/swagger-ui.html#
