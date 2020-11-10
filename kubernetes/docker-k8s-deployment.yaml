@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: json-placeholder-docker-k8s-demo
-        image: hvashistha54/json-placeholder-spring-boot-app
+        image: hvashistha54/spring-boot-app
         ports:
         - containerPort: 8080
